@@ -26,6 +26,7 @@ seed = arp.iv+key
 # recuperation de icv dans le message (arp.icv) (en chiffre) -- je passe au format "text". Il y a d'autres manières de faire ceci...
 icv_encrypted='{:x}'.format(arp.icv).decode("hex")
 
+
 # text chiffré y-compris l'icv
 message_encrypted=arp.wepdata+icv_encrypted 
 
@@ -40,5 +41,6 @@ icv_enclair=cleartext[-4:]
 text_enclair=cleartext[:-4] 
 
 print 'Text: ' + text_enclair.encode("hex")
+print("icv encrypted : " + '{:x}'.format(arp.icv))
 print 'icv:  ' + icv_enclair.encode("hex")
 print 'icv(num): ' + str(icv_numerique)
