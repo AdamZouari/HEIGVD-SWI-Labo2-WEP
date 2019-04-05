@@ -10,24 +10,15 @@ __Auteurs : Nair Alic et Zouari Adam__
 
 Nous voyons que le texte déchiffré est le même dans la sortie du script que dans la capture Wireshark.
 Pour ce qui est du WEP ICV, Wireshark le verifie (`correct`) mais l'affiche sous la forme chiffrée.
-Nous avons verifié cela en ajoutant l'affichage chiffré de l'icv dans le script (`print("icv encrypted : " + '{:x}'.format(arp.icv))`) qui nous affiche bien `ecb3fa23` qui est bien la même valeur que Wireshark affiche. </br>
-![](comparison-script-wireshark.png)
+Nous avons verifié cela en ajoutant l'affichage de l'icv chiffré dans le script (`print("icv encrypted : " + '{:x}'.format(arp.icv))`) qui nous affiche bien `ecb3fa23` qui est bien la même valeur que Wireshark affiche. </br>
+![](decryption.png)
    
 
 ### 2. Chiffrement manuel de WEP
 
-Utilisant le script [`manual-decryption.py`](https://github.com/arubinst/HEIGVD-SWI-Labo2-WEP/blob/master/files/) comme guide, créer un nouveau script `manual-encryption.py` capable de chiffrer un message, l’enregistrer dans un fichier pcap et l’envoyer.
-Vous devrez donc créer votre message, calculer le contrôle d’intégrité (ICV), et les chiffrer (voir slides du cours pour les détails).
+Dans notre script `manual-encryption.py` nous avons généré `arpv2.cap` qui est une copie de la capture de base ou nous avons simplement modifié les champs `icv` et `wepdata`. Wireshark est capable de déchiffré notre trame nous savons donc que la trame est correcte. De plus, dela même manière que pour l'étape 1, nous avons comparé la sortie de notre script.
 
-
-### Quelques éléments à considérer :
-
-- Vous pouvez utiliser la même trame fournie comme « template » pour votre trame forgée (conseillé). Il faudra mettre à jour le champ de données qui transporte le message (`wepdata`) et le contrôle d’intégrite (`icv`).
-- Le champ `wepdata` accepte des données en format text.
-- Le champ `icv` accepte des données en format « long ».
-- Vous pouvez vous guider à partir du script fourni pour les différentes conversions de formats qui pourraient être nécessaires.
-- Vous pouvez exporter votre nouvelle trame en format pcap utilisant Scapy et ensuite, l’importer dans Wireshark. Si Wireshark est capable de déchiffrer votre trame forgée, elle est correcte !
-
+![](encryption.png)
 
 ### 3. Fragmentation
 
