@@ -41,7 +41,6 @@ def fragment_and_encrypt(message):
     trames = []
     
     
-    
     i = 0
     while i < len(fragmented_message):
         
