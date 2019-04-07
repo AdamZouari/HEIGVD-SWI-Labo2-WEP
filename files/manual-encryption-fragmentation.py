@@ -16,7 +16,7 @@ import rc4
 import binascii
 
 
-def encryption(fragment, key = '\xaa\xaa\xaa\xaa\xaa'):
+def encryption(fragment, arp ,key = '\xaa\xaa\xaa\xaa\xaa'):
     
     # on calcule le icv (A.K.A CRC 32) et on le converti en unsigned int little-endian
     # To generate the same numeric value across all Python versions and platforms use crc32(data) & 0xffffffff.
@@ -58,14 +58,14 @@ def fragment_and_encrypt(message):
             
         # si il reste encore des fragments, alors on set le bit More Fragment a 1 (3e bit de poids faible de FCfield)
         if i != len(fragmented_message) -1:
-            arp.FCfield = arp.FCfield | 0x100
+            arp.FCfield = arp.FCfield | 0x4
         
         # si fragrement trop petit on ajoute du padding
         if len(fragmented_message[i]) < 36:
             fragmented_message[i] = fragmented_message[i] + ' '*(36 - len(fragmented_message[i]))
         
         # chiffrement du fragment
-        encrypted_fragments[i] = encryption(fragmented_message[i])
+        encrypted_fragments[i] = encryption(fragmented_message[i], arp)
         
         # on recupere le icv chiffre (4 derniers bytes) et le convertit en Long big endian
         (icv_num,) = struct.unpack('!L', encrypted_fragments[i][-4:])
