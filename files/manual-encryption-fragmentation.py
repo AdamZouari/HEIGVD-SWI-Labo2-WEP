@@ -46,6 +46,9 @@ def fragment_and_encrypt(message):
         
         # On recupere le paquet fourni
         arp = rdpcap('arp.cap')[0]
+        
+        # initialisation du compteur de fragment
+        arp.SC = i
     
         # si premier fragment
         if i == 0:
@@ -54,7 +57,7 @@ def fragment_and_encrypt(message):
         # pour les autres fragments, on update le compteur de fragments
         else:
             fragmented_message[i] = message[i*36: (i+1)*36]
-            arp.SC = i
+            
             
         # si il reste encore des fragments, alors on set le bit More Fragment a 1 (3e bit de poids faible de FCfield)
         if i != len(fragmented_message) -1:

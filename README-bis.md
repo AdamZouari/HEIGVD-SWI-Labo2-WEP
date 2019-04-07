@@ -24,6 +24,18 @@ Dans notre script `manual-encryption.py` nous avons généré `arpv2.cap` qui es
 
 Dans cette partie, vous allez enrichir votre script développé dans la partie précédente pour chiffrer 3 fragments.
 
+Notre script semble bien fonctionner bien et chiffre chaque fragments de la trame. On nous a demandé de chiffrer 3 fragments mais notre script fonctionne aussi pour n'importe quelle taille de message.
+
+Dans cet exemple on a le premier fragment, on voit bien que le Flag "More fragment" annonce qu'il y a une suite : 
+![](PacketFragmentedFirst.png)
+
+Et ici nous avons le dernier fragment et donc la fin de la trame : 
+![](PacketFragmentedLast.png)
+
+Et finalement la trame réassemblée, on voit bien que le message est complet :
+![](PacketFragmentedReassambled.png)
+
+
 ### Quelques éléments à considérer :
 
 - Chaque fragment est numéroté. La première trame d’une suite de fragments a toujours le numéro de fragment à 0. Une trame entière (sans fragmentation) comporte aussi le numéro de fragment égal à 0
@@ -33,7 +45,6 @@ Dans cette partie, vous allez enrichir votre script développé dans la partie p
 - Pour vérifier que cette partie fonctionne, vous pouvez importer vos fragments dans Wireshark, qui doit être capable de les recomposer
 - Pour un test encore plus intéressant (optionnel), vous pouvez utiliser un AP (disponible sur demande) et envoyer vos fragments. Pour que l’AP accepte vous données injectées, il faudra faire une « fake authentication » que vous pouvez faire avec `aireplay-ng`
 - Si l’AP accepte vos fragments, il les recomposera et les retransmettra en une seule trame non-fragmentée !
-
 
 ### 4. Shared-key fake authentication (bonus)
 
