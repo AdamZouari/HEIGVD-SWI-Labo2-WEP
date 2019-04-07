@@ -58,7 +58,6 @@ def fragment_and_encrypt(message):
         else:
             fragmented_message[i] = message[i*36: (i+1)*36]
             
-            
         # si il reste encore des fragments, alors on set le bit More Fragment a 1 (3e bit de poids faible de FCfield)
         if i != len(fragmented_message) -1:
             arp.FCfield = arp.FCfield | 0x4
@@ -91,7 +90,6 @@ def fragment_and_encrypt(message):
 
 #Cle wep AA:AA:AA:AA:AA
 #key='\xaa\xaa\xaa\xaa\xaa'
-
 
 
 # creation du message a chiffre (multiple de 36) et stockage dans un tableau de string contenant les fragments

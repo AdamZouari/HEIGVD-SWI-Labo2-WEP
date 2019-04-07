@@ -11,14 +11,14 @@ __Auteurs : Nair Alic et Zouari Adam__
 Nous voyons que le texte déchiffré est le même dans la sortie du script que dans la capture Wireshark.
 Pour ce qui est du WEP ICV, Wireshark le verifie (`correct`) mais l'affiche sous la forme chiffrée.
 Nous avons verifié cela en ajoutant l'affichage de l'icv chiffré dans le script (`print("icv encrypted : " + '{:x}'.format(arp.icv))`) qui nous affiche bien `ecb3fa23` qui est bien la même valeur que Wireshark affiche. </br>
-![](decryption.png)
+![](img/decryption.png)
    
 
 ### 2. Chiffrement manuel de WEP
 
 Dans notre script `manual-encryption.py` nous avons généré `arpv2.cap` qui est une copie de la capture de base ou nous avons simplement modifié les champs `icv` et `wepdata`. Wireshark est capable de déchiffré notre trame nous savons donc que la trame est correcte. De plus, dela même manière que pour l'étape 1, nous avons comparé la sortie de notre script.
 
-![](encryption.png)
+![](img/encryption.png)
 
 ### 3. Fragmentation
 
@@ -27,13 +27,13 @@ Dans cette partie, vous allez enrichir votre script développé dans la partie p
 Notre script semble bien fonctionner bien et chiffre chaque fragments de la trame. On nous a demandé de chiffrer 3 fragments mais notre script fonctionne aussi pour n'importe quelle taille de message.
 
 Dans cet exemple on a le premier fragment, on voit bien que le Flag "More fragment" annonce qu'il y a une suite : 
-![](PacketFragmentedFirst.png)
+![](img/PacketFragmentedFirst.png)
 
 Et ici nous avons le dernier fragment et donc la fin de la trame : 
-![](PacketFragmentedLast.png)
+![](img/PacketFragmentedLast.png)
 
 Et finalement la trame réassemblée, on voit bien que le message est complet :
-![](PacketFragmentsReassambled.png)
+![](img/PacketFragmentsReassambled.png)
 
 
 ### Quelques éléments à considérer :
